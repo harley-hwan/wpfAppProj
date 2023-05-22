@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfAppProj.Models;
+using wpfAppProj.ViewModels;
 
 namespace wpfAppProj
 {
@@ -20,10 +22,37 @@ namespace wpfAppProj
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel mainViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
-            MessageBox.Show("알림띄우기");
+            mainViewModel = new MainViewModel();
+            mainViewModel.ProgressValue = 30;
+            DataContext = mainViewModel;
+        }
+
+        private void btnTest1_Click(object sender, RoutedEventArgs e)
+        {
+            List<User> myList1 = new List<User>();
+            labelTest1.Content = "내용변경완료";
+            //MessageBox.Show(textBox1.Text);
+            User userA = new User();
+            userA.UserImg = @"C:\Users\user\Documents\GitHub\wpfAppProj\wpfAppProj\Image1.jpg";
+            userA.Name = "Noah";
+            userA.UserAge = 15;
+
+            User userB = new User();
+            userB.UserImg = @"C:\Users\user\Documents\GitHub\wpfAppProj\wpfAppProj\Image2.jpg";
+            userB.Name = "Liam";
+            userB.UserAge = 15;
+
+            myList1.Add(userA);
+            myList1.Add(userB);
+
+            listView1.ItemsSource = myList1;
+            mainViewModel.ProgressValue = 100;
+
         }
     }
 }
